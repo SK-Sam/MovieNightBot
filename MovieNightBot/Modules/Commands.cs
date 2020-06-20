@@ -9,10 +9,25 @@ namespace MovieNightBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
-        [Command("ping")]
+        [Command("bing")]
         public async Task Ping()
         {
-            await ReplyAsync("Pong");
+            await ReplyAsync("Bong");
+        }
+        [Command("ayy")]
+        public async Task Lmao()
+        {
+            await ReplyAsync("lmao");
+        }
+        [Command("hell")]
+        public async Task Yeah()
+        {
+            await ReplyAsync("yeah");
+        }
+        [Command("adrian")]
+        public async Task Rat()
+        {
+            await ReplyAsync(":rat:");
         }
     }
 }

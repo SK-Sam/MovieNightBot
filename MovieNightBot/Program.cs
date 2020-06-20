@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Discord;
@@ -12,9 +13,8 @@ namespace MovieNightBot
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-        }
+        static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
+        
 
         private DiscordSocketClient _client;
         private CommandService _commands;
@@ -28,10 +28,39 @@ namespace MovieNightBot
                 .AddSingleton(_commands)
                 .AddSingleton<ConfigHandler>()
                 .BuildServiceProvider();
+            _client.Log += _client_Log;
+            
+            await RegisterCommandAsync();
+
             await _services.GetService<ConfigHandler>().PopulateConfig();
 
             await _client.LoginAsync(TokenType.Bot, _services.GetService<ConfigHandler>().GetToken());
             await _client.StartAsync();
+            await Task.Delay(-1);
+        }
+
+        private Task _client_Log(LogMessage arg)
+        {
+            Console.WriteLine(arg);
+            return Task.CompletedTask;
+        }
+
+        public async Task RegisterCommandAsync()
+        {
+            _client.MessageReceived += HandleCommandAsync;
+            await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
+        }
+        private async Task HandleCommandAsync(SocketMessage arg)
+        {
+            var message = arg as SocketUserMessage;
+            var context = new SocketCommandContext(_client, message);
+            if (message.Author.IsBot) return;
+            int argPos = 0;
+            if(message.HasStringPrefix("!", ref argPos))
+            {
+                var result = await _commands.ExecuteAsync(context, argPos, _services);
+                if (!result.IsSuccess) Console.WriteLine(result.ErrorReason);
+            }
         }
     }
 }

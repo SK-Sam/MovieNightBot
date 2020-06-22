@@ -10,8 +10,13 @@ namespace MovieNightBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
+<<<<<<< HEAD
 
         List<string> movie_list = new List<string>();
+=======
+        
+        static List<string> movie_list = new List<string>();
+>>>>>>> 5b91305421af9a748586e0b8025648f5488ad9d6
 
         [Command("help")]
         public async Task Ping()

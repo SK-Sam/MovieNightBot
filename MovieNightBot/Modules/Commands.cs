@@ -10,7 +10,7 @@ namespace MovieNightBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
-        
+
         List<string> movie_list = new List<string>();
 
         [Command("help")]
@@ -25,15 +25,15 @@ namespace MovieNightBot.Modules
         [Command("ayy")]
         public async Task Lmao()
         {
-            await ReplyAsync("lmao").ConfigureAwait(false); ;
+            await ReplyAsync("lmao", true).ConfigureAwait(false); ;
         }
         [Command("add")]
-        public async Task Add([Remainder]string movie)
+        public async Task Add([Remainder] string movie)
         {
-            
-            await ReplyAsync("Adding \"" + movie + "\" to the list.").ConfigureAwait(false); ;
+
+            await ReplyAsync("Adding \"" + movie + "\" to the list.", true).ConfigureAwait(false); ;
             movie_list.Add(movie);
-            
+
         }
 
         [Command("adrian")]
@@ -42,7 +42,7 @@ namespace MovieNightBot.Modules
             await ReplyAsync(":rat:").ConfigureAwait(false); ;
         }
 
-        /*[Command("list")]
+        [Command("list")]
         public async Task List()
         {
             string view_movie_list = "";
@@ -52,6 +52,6 @@ namespace MovieNightBot.Modules
                 view_movie_list = view_movie_list + counter.ToString() + ": \"" + movie_list[i] + "\"\n";
             }
             await ReplyAsync(view_movie_list).ConfigureAwait(false); ;
-        }*/
+        }
     }
 }

@@ -14,23 +14,18 @@ namespace MovieNightBot.Modules
     {
         Random random = new Random();
         TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
-
-        //static List<string> movie_list = new List<string>();
         static Dictionary<string, List<string>> movie_list = new Dictionary<string, List<string>>();
         
-
-
-
-
         [Command("help")]
         public async Task Ping()
         {
             await ReplyAsync("Commands: \n!ayy: I will Lmao.\n" +
-                                            "!add: I will add movie title to list of movies.\n" +
-                                            "!list: I will show every movie on the list.\n" +
-                                            "!remove: I will remove said movie from the movie list.\n" +
-                                            "!roll: I will help your indecisiveness by rolling dice to figure out which movie to watch.\n" +
-                                            "!(name): I will append the proper emoji which describes said individual.\n", true).ConfigureAwait(false);
+                                            "?add: I will add movie title to list of movies.\n" +
+                                            "?clear: I will clear the movie list.\n" +
+                                            "?list: I will show every movie on the list.\n" +
+                                            "?remove: I will remove said movie from the movie list.\n" +
+                                            "?roll: I will help your indecisiveness by rolling dice to figure out which movie to watch.\n" +
+                                            "?(name): I will append the proper emoji which describes said individual.\n", true).ConfigureAwait(false);
         }
 
         [Command("add")]
@@ -70,6 +65,12 @@ namespace MovieNightBot.Modules
                 view_movie_list = view_movie_list + counter.ToString() + ": \"" + myTI.ToTitleCase((movie_list[guild_server])[i]) + "\"\n";
             }
             await ReplyAsync(view_movie_list, true).ConfigureAwait(false); ;
+        }
+
+        [Command("poll")]
+        public async Task Poll()
+        {
+            await ReplyAsync("Placeholder").ConfigureAwait(false);
         }
 
         [Command("remove")]
@@ -115,7 +116,8 @@ namespace MovieNightBot.Modules
         {
             await ReplyAsync("You rolled Gachimuchi. We're watching... Boy Next Door. AHHHHH.", true).ConfigureAwait(false);
         }
-
+        
+        //Test commands
         [Command("test")]
         public async Task Test()
         {

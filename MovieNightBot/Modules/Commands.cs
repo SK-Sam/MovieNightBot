@@ -32,17 +32,24 @@ namespace MovieNightBot.Modules
         public async Task Add([Remainder] string movie)
         {
             string guild_server = Context.Guild.Id.ToString();
-            if (!movie_list.ContainsKey(Context.Guild.Id.ToString()))
+            if (!movie_list.ContainsKey(guild_server))
             {
                 List<string> temp = new List<string>();
                 movie_list.Add(Context.Guild.Id.ToString(), temp);
                 movie_list[guild_server].Add(myTI.ToTitleCase(movie));
             }
-            else if (movie_list.ContainsKey(Context.Guild.Id.ToString()))
+            else
             {
-                movie_list[guild_server].Add(myTI.ToTitleCase(movie));
+                if(!movie_list[guild_server].Contains(movie))
+                {
+                    movie_list[guild_server].Add(myTI.ToTitleCase(movie));
+                    await ReplyAsync("Adding \"" + myTI.ToTitleCase(movie) + "\" to the list.", true).ConfigureAwait(false);
+                }
+                else
+                {
+                    await ReplyAsync("Duplicate movie already in the list.", true).ConfigureAwait(false);
+                }
             }
-            await ReplyAsync("Adding \"" + myTI.ToTitleCase(movie) + "\" to the list.", true).ConfigureAwait(false);
         }
 
         [Command("clear")]

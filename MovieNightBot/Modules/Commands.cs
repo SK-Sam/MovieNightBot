@@ -50,6 +50,14 @@ namespace MovieNightBot.Modules
             await ReplyAsync("Adding \"" + myTI.ToTitleCase(movie) + "\" to the list.", true).ConfigureAwait(false);
         }
 
+        [Command("clear")]
+        public async Task Clear()
+        {
+            string guild_server = Context.Guild.Id.ToString();
+            List<string> temp = new List<string>();
+            movie_list[guild_server] = temp;
+            await ReplyAsync("List cleared.").ConfigureAwait(false);
+        }
 
         [Command("list")]
         public async Task List()

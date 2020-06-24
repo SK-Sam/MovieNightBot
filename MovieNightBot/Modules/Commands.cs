@@ -31,21 +31,21 @@ namespace MovieNightBot.Modules
         [Command("add")]
         public async Task Add([Remainder] string movie)
         {
-            string guild_server = Context.Guild.Id.ToString();
-            if (!movie_list.ContainsKey(guild_server))
+            string guild_server = Context.Guild.Id.ToString(); // Create variable for unique server ID
+            if (!movie_list.ContainsKey(guild_server))// Dictionary does not have ID
             {
-                List<string> temp = new List<string>();
+                List<string> temp = new List<string>();// Create new List for Server
                 movie_list.Add(Context.Guild.Id.ToString(), temp);
                 movie_list[guild_server].Add(myTI.ToTitleCase(movie));
             }
-            else
+            else // Dictionary contains ID
             {
-                if(!movie_list[guild_server].Contains(movie))
+                if(!movie_list[guild_server].Contains(movie))// List for unique ID does not have movie
                 {
                     movie_list[guild_server].Add(myTI.ToTitleCase(movie));
                     await ReplyAsync("Adding \"" + myTI.ToTitleCase(movie) + "\" to the list.", true).ConfigureAwait(false);
                 }
-                else
+                else// List for ID does have movie
                 {
                     await ReplyAsync("Duplicate movie already in the list.", true).ConfigureAwait(false);
                 }

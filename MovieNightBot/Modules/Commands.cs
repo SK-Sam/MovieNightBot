@@ -40,7 +40,7 @@ namespace MovieNightBot.Modules
             }
             else // Dictionary contains ID
             {
-                if(!movie_list[guild_server].Contains(movie))// List for unique ID does not have movie
+                if(!movie_list[guild_server].Contains(myTI.ToTitleCase(movie)))// List for unique ID does not have movie
                 {
                     movie_list[guild_server].Add(myTI.ToTitleCase(movie));
                     await ReplyAsync("Adding \"" + myTI.ToTitleCase(movie) + "\" to the list.", true).ConfigureAwait(false);

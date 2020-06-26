@@ -37,6 +37,7 @@ namespace MovieNightBot.Modules
                 List<string> temp = new List<string>();// Create new List for Server
                 movie_list.Add(Context.Guild.Id.ToString(), temp);
                 movie_list[guild_server].Add(myTI.ToTitleCase(movie));
+                await ReplyAsync("Adding \"" + myTI.ToTitleCase(movie) + "\" to the list.", true).ConfigureAwait(false);
             }
             else // Dictionary contains ID
             {

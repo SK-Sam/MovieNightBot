@@ -15,6 +15,7 @@ namespace MovieNightBot.Modules
         Random random = new Random();
         TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
         static Dictionary<string, List<string>> movie_list = new Dictionary<string, List<string>>();
+        //Dictionary<int, Dictionary<string, int>> movie_bot = new Dictionary<int, Dictionary<string, int>>();
         
         [Command("help")]
         public async Task Ping()

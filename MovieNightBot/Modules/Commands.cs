@@ -20,13 +20,13 @@ namespace MovieNightBot.Modules
         [Command("help")]
         public async Task Ping()
         {
-            await ReplyAsync("Commands: \n!ayy: I will Lmao.\n" +
+            await ReplyAsync("'Commands: \n?ayy: I will Lmao.\n" +
                                             "?add: I will add movie title to list of movies.\n" +
                                             "?clear: I will clear the movie list.\n" +
                                             "?list: I will show every movie on the list.\n" +
                                             "?remove: I will remove said movie from the movie list.\n" +
                                             "?roll: I will help your indecisiveness by rolling dice to figure out which movie to watch.\n" +
-                                            "?(name): I will append the proper emoji which describes said individual.\n", true).ConfigureAwait(false);
+                                            "?(name): I will append the proper emoji which describes said individual.\n'", true).ConfigureAwait(false);
         }
 
         [Command("add")]

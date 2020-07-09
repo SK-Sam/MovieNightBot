@@ -15,6 +15,7 @@ namespace MovieNightBot.Modules
         Random random = new Random();
         TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
         static Dictionary<string, List<string>> movie_list = new Dictionary<string, List<string>>();
+        //Dictionary<int, Dictionary<string, int>> movie_bot = new Dictionary<int, Dictionary<string, int>>();
         
         [Command("help")]
         public async Task Ping()
@@ -37,6 +38,7 @@ namespace MovieNightBot.Modules
                 List<string> temp = new List<string>();// Create new List for Server
                 movie_list.Add(Context.Guild.Id.ToString(), temp);
                 movie_list[guild_server].Add(myTI.ToTitleCase(movie));
+                await ReplyAsync("Adding \"" + myTI.ToTitleCase(movie) + "\" to the list.", true).ConfigureAwait(false);
             }
             else // Dictionary contains ID
             {
